@@ -1,0 +1,11 @@
+SELECT 
+  * 
+FROM 
+  GREEN_TAXI_DATA 
+WHERE 
+  TRIP_DISTANCE in (
+    SELECT 
+      MAX(TRIP_DISTANCE) 
+    FROM 
+      GREEN_TAXI_DATA
+  );
