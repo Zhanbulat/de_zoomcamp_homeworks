@@ -1,0 +1,4 @@
+df = spark.read.parquet('fhvhv/2021/06/')
+df= df.withColumn('duration', df.dropoff_datetime.cast("long") - df.pickup_datetime.cast("long"))
+df=df.select(F.max(df.duration/3600))
+df.show()
