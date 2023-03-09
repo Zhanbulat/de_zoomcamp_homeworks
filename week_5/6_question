@@ -1,0 +1,8 @@
+df = spark.read.parquet('fhvhv/2021/06/')
+zones  = spark.read \
+    .option("header", "true") \
+    .csv('taxi+_zone_lookup.csv')
+df_result = df.join(zones, df.PULocationID==zones.LocationID).select('pickup_datetime','Zone')
+df=df_result.groupBy('Zone').count()
+df = df.orderBy(df['count'], ascending=False)
+df.show()
